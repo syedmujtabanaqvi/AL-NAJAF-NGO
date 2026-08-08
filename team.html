@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team & Volunteers — Al Najaf Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;
+    --khaki:#5A5335;
+    --khaki-light:#EDE7D3;
+    --amber:#D99B0B;
+    --cross:#A3213A;
+    --paper:#F1EEE4;
+    --paper-dark:#E7E1CE;
+    --charcoal:#242217;
+    --line: rgba(20,33,61,0.14);
+    --display: 'Fraunces', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--khaki);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1.5px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  button, .btn{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    border-radius:2px;
+  }
+  button:focus-visible, a:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(241,238,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:74px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:32px;height:32px;
+    border-radius:50%;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--ink);
+  }
+  nav.links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--charcoal);
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .18s ease, color .18s ease;
+  }
+  nav.links a:hover, nav.links a.active{ border-color:var(--amber); color:var(--ink); }
+
+  .nav-actions{ display:flex; align-items:center; gap:18px; }
+  .donate-btn{
+    background:var(--cross);
+    color:#fff;
+    padding:10px 20px;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    display:inline-block;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .donate-btn:hover{ background:#8a1a2f; transform:translateY(-1px); }
+
+  .menu-btn{ display:none; background:none; padding:8px; }
+  .menu-btn span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-header{
+    padding:60px 0 40px;
+    background:var(--paper-dark);
+    border-bottom:1px solid var(--line);
+  }
+  .page-header h1{
+    font-size:clamp(2.2rem, 3.8vw, 3.2rem);
+    margin-top:12px;
+  }
+  .page-header p{
+    color:#454331;
+    font-size:16.5px;
+    max-width:60ch;
+    margin-top:12px;
+  }
+
+  /* ---------- TEAM SECTION ---------- */
+  .team-page{ padding:60px 0 88px; }
+  
+  .filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:8px 14px;
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--charcoal);
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip.active, .chip:hover{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+
+  .team-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+
+  .member-card{
+    background:#fff;
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .member-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px -18px rgba(20,33,61,0.35);
+  }
+
+  .member-photo{
+    width:100%;
+    aspect-ratio:4/3;
+    position:relative;
+    overflow:hidden;
+    background:
+      linear-gradient(135deg, rgba(20,33,61,0.08), rgba(217,155,11,0.14)),
+      repeating-linear-gradient(45deg, rgba(20,33,61,0.05) 0 2px, transparent 2px 10px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .member-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+
+  .role-tag{
+    position:absolute;
+    top:12px;
+    left:12px;
+    font-family:var(--mono);
+    font-size:11px;
+    background:var(--ink);
+    color:#fff;
+    padding:3px 8px;
+  }
+
+  .joined-tag{
+    position:absolute;
+    bottom:12px;
+    right:12px;
+    font-family:var(--mono);
+    font-size:11px;
+    background:rgba(241,238,228,0.92);
+    color:var(--khaki);
+    padding:2px 6px;
+    border:1px solid var(--line);
+  }
+
+  .member-body{
+    padding:24px;
+    display:flex;
+    flex-direction:column;
+    flex-grow:1;
+  }
+
+  .member-body h3{
+    font-size:20px;
+    font-weight:600;
+  }
+
+  .member-title{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--cross);
+    margin-top:2px;
+    font-weight:500;
+  }
+
+  .member-desc{
+    font-size:14px;
+    color:#454331;
+    margin:14px 0;
+    flex-grow:1;
+  }
+
+  .member-meta{
+    border-top:1px solid var(--line);
+    padding-top:12px;
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--khaki);
+  }
+
+  /* ---------- JOIN TEAM BANNER ---------- */
+  .join-banner{
+    margin-top:60px;
+    background:var(--paper-dark);
+    border:1px solid var(--line);
+    padding:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .join-banner h3{
+    font-size:24px;
+  }
+  .join-banner p{
+    margin-top:6px;
+    color:#454331;
+    font-size:15px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#C9C9BA;
+    padding:64px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(237,233,218,0.15);
+  }
+  .footer-grid h4{
+    color:#fff;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid a{ text-decoration:none; font-size:14px; color:#C9C9BA; }
+  .footer-grid a:hover{ color:var(--amber); }
+  .footer-brand p{ font-size:14px; color:#A9A99A; max-width:32ch; }
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    font-size:12.5px;
+    color:#8C8C7E;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    nav.links{ display:none; }
+    .menu-btn{ display:block; }
+    .team-grid{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:32px; }
+  }
+  @media (max-width:600px){
+    .team-grid{ grid-template-columns:1fr; }
+    .join-banner{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">AF</span>
+      Al Najaf Foundation
+    </a>
+    <nav class="links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="team.html" class="active">Our Team</a>
+      <a href="index.html#involved">Get Involved</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="index.html#contact" class="donate-btn">Donate</a>
+      <button class="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="wrap">
+      <p class="eyebrow">The People Behind The Duty</p>
+      <h1>Our Team & Volunteers</h1>
+      <p>Meet the dedicated individuals who lead our medical camps, manage emergency relief operations, and ensure community security across all operating districts.</p>
+    </div>
+  </section>
+
+  <!-- TEAM DIRECTORY -->
+  <section class="team-page">
+    <div class="wrap">
+
+      <!-- FILTERS -->
+      <div class="filters" role="tablist" aria-label="Filter team members by department">
+        <button class="chip active" data-dept="all">All Members</button>
+        <button class="chip" data-dept="medical">Medical Staff</button>
+        <button class="chip" data-dept="security">Security Detail</button>
+        <button class="chip" data-dept="relief">Relief & Logistics</button>
+        <button class="chip" data-dept="coordinators">Coordinators</button>
+      </div>
+
+      <!-- TEAM GRID -->
+      <div class="team-grid" id="teamGrid">
+
+        <!-- Member 1 -->
+        <div class="member-card" data-dept="medical">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Dr. Ali Raza"> -->
+            <span class="role-tag">Medical Staff</span>
+            <span class="joined-tag">Since 2012</span>
+          </div>
+          <div class="member-body">
+            <h3>Dr. Ali Raza</h3>
+            <div class="member-title">Lead Medical Officer</div>
+            <p class="member-desc">Oversees free medical checkups, doctor duty rosters, and pharmacy supply for all Karachi camps.</p>
+            <div class="member-meta">
+              <span>Camps Lead: 140+</span>
+              <span>District: Karachi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="member-card" data-dept="security">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Syed Muhammad"> -->
+            <span class="role-tag">Security Detail</span>
+            <span class="joined-tag">Since 2014</span>
+          </div>
+          <div class="member-body">
+            <h3>Syed Muhammad</h3>
+            <div class="member-title">Head of Security Operations</div>
+            <p class="member-desc">Manages volunteer security teams and crowd safety protocols during major public gatherings and camps.</p>
+            <div class="member-meta">
+              <span>Ops Managed: 65+</span>
+              <span>District: Karachi</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="member-card" data-dept="relief">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Tariq Hussain"> -->
+            <span class="role-tag">Relief & Logistics</span>
+            <span class="joined-tag">Since 2016</span>
+          </div>
+          <div class="member-body">
+            <h3>Tariq Hussain</h3>
+            <div class="member-title">Relief Response Lead</div>
+            <p class="member-desc">Coordinates flood response, ration drives, and winter distribution networks across Sindh districts.</p>
+            <div class="member-meta">
+              <span>Drives Led: 40+</span>
+              <span>District: Sindh Region</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="member-card" data-dept="coordinators">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Zain Abbas"> -->
+            <span class="role-tag">Coordinators</span>
+            <span class="joined-tag">Since 2018</span>
+          </div>
+          <div class="member-body">
+            <h3>Zain Abbas</h3>
+            <div class="member-title">Field Operations Coordinator</div>
+            <p class="member-desc">Handles site setups, local permissions, and volunteer schedules for weekend mobile medical units.</p>
+            <div class="member-meta">
+              <span>Camps Managed: 80+</span>
+              <span>District: Hyderabad</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div class="member-card" data-dept="medical">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Dr. Bilal Ahmed"> -->
+            <span class="role-tag">Medical Staff</span>
+            <span class="joined-tag">Since 2020</span>
+          </div>
+          <div class="member-body">
+            <h3>Dr. Bilal Ahmed</h3>
+            <div class="member-title">Eye Camp Specialist</div>
+            <p class="member-desc">Leads ophthalmology screening camps and coordinates vision aid distributions in rural areas.</p>
+            <div class="member-meta">
+              <span>Patients Seen: 12K+</span>
+              <span>District: Thatta</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 6 -->
+        <div class="member-card" data-dept="security">
+          <div class="member-photo">
+            <!-- <img src="URL_HERE" alt="Hamza Khan"> -->
+            <span class="role-tag">Security Detail</span>
+            <span class="joined-tag">Since 2021</span>
+          </div>
+          <div class="member-body">
+            <h3>Hamza Khan</h3>
+            <div class="member-title">Deputy Security Supervisor</div>
+            <p class="member-desc">Trains new security volunteers and manages entry-exit protocols at high-volume health camps.</p>
+            <div class="member-meta">
+              <span>Shifts Completed: 120+</span>
+              <span>District: Karachi</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- JOIN BANNER -->
+      <div class="join-banner">
+        <div>
+          <h3>Want to join our team?</h3>
+          <p>We are always looking for dedicated medical professionals, logistics volunteers, and security support staff.</p>
+        </div>
+        <a href="index.html#involved" class="btn-primary">Apply as a Volunteer</a>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Amaan Foundation</h4>
+        <p>Medical care, relief, and community security — serving our neighbourhoods since 2008.</p>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="index.html#involved">Donate</a></li>
+          <li><a href="index.html#involved">Volunteer</a></li>
+          <li><a href="#">Partner with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+92210000000">+92 21 0000 000</a></li>
+          <li><a href="mailto:info@amaanfoundation.org">info@amaanfoundation.org</a></li>
+          <li><a href="#">Karachi, Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Amaan Foundation. All rights reserved.</span>
+      <span>Registered non-profit · Est. 2008</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Filter functionality by Department
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('#teamGrid .member-card');
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      
+      const dept = chip.dataset.dept;
+      cards.forEach(card => {
+        const show = dept === 'all' || card.dataset.dept === dept;
+        card.style.display = show ? 'flex' : 'none';
+      });
+    });
+  });
+
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('nav.links');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    if(isOpen){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '74px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'var(--paper)';
+      navLinks.style.padding = '20px 24px';
+      navLinks.style.borderBottom = '1px solid var(--line)';
+      navLinks.style.gap = '18px';
+    }
+  });
+</script>
+
+</body>
+</html>

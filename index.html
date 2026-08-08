@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alnajaf Foundation — Medical Camps, Relief & Community Security since 2008</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  .gphoto{
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--line);
+}
+
+.gphoto img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+}
+
+.gphoto .yr-tag,
+.gphoto .info{
+    position: relative;
+    z-index: 2;
+}
+
+.gphoto::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.65), transparent 55%);
+    z-index: 1;
+}
+  :root{
+    --ink:#14213D;
+    --khaki:#5A5335;
+    --khaki-light:#EDE7D3;
+    --amber:#0bd927;
+    --cross:#A3213A;
+    --paper:#F1EEE4;
+    --paper-dark:#E7E1CE;
+    --charcoal:#242217;
+    --line: rgba(20,33,61,0.14);
+    --display: 'Fraunces', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--khaki);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1.5px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  button, .btn{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    border-radius:2px;
+  }
+  button:focus-visible, a:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(241,238,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:74px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:32px;height:32px;
+    border-radius:50%;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--ink);
+  }
+  nav.links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--charcoal);
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .18s ease, color .18s ease;
+  }
+  nav.links a:hover{ border-color:var(--amber); color:var(--ink); }
+
+  .nav-actions{ display:flex; align-items:center; gap:18px; }
+  .donate-btn{
+    background:var(--cross);
+    color:#fff;
+    padding:10px 20px;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    display:inline-block;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .donate-btn:hover{ background:#8a1a2f; transform:translateY(-1px); }
+
+  .menu-btn{ display:none; background:none; padding:8px; }
+  .menu-btn span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:76px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.5rem, 4.4vw, 4rem);
+    line-height:1.03;
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--cross);
+  }
+  .hero p.lede{
+    margin-top:22px;
+    font-size:18px;
+    max-width:46ch;
+    color:#454331;
+  }
+  .hero-ctas{
+    margin-top:30px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:#fff;
+    padding:14px 26px;
+    text-decoration:none;
+    display:inline-block;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .btn-primary:hover{ background:#0d1730; transform:translateY(-2px); }
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    padding:14px 26px;
+    border:1.5px solid var(--ink);
+    text-decoration:none;
+    display:inline-block;
+    transition:background .18s ease, color .18s ease;
+  }
+  .btn-secondary:hover{ background:var(--ink); color:#fff; }
+
+  /* Stamp / seal signature element */
+  .seal-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+  }
+  .seal{
+    width:260px;height:260px;
+    border-radius:50%;
+    border:2px solid var(--khaki);
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:rotate(-8deg);
+    color:var(--khaki);
+    background:
+      repeating-radial-gradient(circle at center, transparent 0 3px, rgba(90,83,53,0.05) 3px 4px);
+  }
+  .seal::before{
+    content:"";
+    position:absolute;
+    inset:12px;
+    border-radius:50%;
+    border:1px dashed var(--khaki);
+    opacity:0.6;
+  }
+  .seal-text{
+    text-align:center;
+    font-family:var(--mono);
+  }
+  .seal-text .est{
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+  }
+  .seal-text .yr{
+    font-family:var(--display);
+    font-size:44px;
+    color:var(--ink);
+    font-weight:600;
+    margin:2px 0;
+  }
+  .seal-text .tag{
+    font-size:10.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- STATS LEDGER ---------- */
+  .ledger{
+    margin-top:56px;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    background:var(--paper-dark);
+  }
+  .ledger-row{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .ledger-item{
+    padding:26px 24px;
+    border-left:1px solid var(--line);
+  }
+  .ledger-item:first-child{ border-left:none; }
+  .ledger-num{
+    font-family:var(--mono);
+    font-size:clamp(1.8rem, 2.6vw, 2.5rem);
+    color:var(--cross);
+    font-weight:600;
+  }
+  .ledger-label{
+    font-size:13px;
+    color:var(--khaki);
+    margin-top:4px;
+    letter-spacing:0.03em;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:88px 0; }
+  .section-head{
+    max-width:640px;
+    margin-bottom:48px;
+  }
+  .section-head h2{
+    font-size:clamp(1.8rem,3vw,2.5rem);
+    margin-top:14px;
+    font-weight:600;
+  }
+  .section-head p{
+    margin-top:14px;
+    color:#454331;
+    font-size:16px;
+  }
+
+  /* ---------- ABOUT SNAPSHOT ---------- */
+  .about-snap{
+    background:var(--ink);
+    color:#EDE9DA;
+  }
+  .about-snap .section-head h2{ color:#fff; }
+  .about-snap .section-head p{ color:#C4C4B4; }
+  .about-snap .eyebrow{ color:var(--amber); }
+  .about-snap .eyebrow::before{ background:#EDE9DA; }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .about-grid p{ color:#C9C9BA; font-size:16px; margin:0 0 16px; }
+  .timeline{
+    border-left:2px solid rgba(237,233,218,0.25);
+    padding-left:24px;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .timeline-item .yr{
+    font-family:var(--mono);
+    color:var(--amber);
+    font-size:14px;
+  }
+  .timeline-item .desc{
+    font-size:15px;
+    color:#DAD9C9;
+    margin-top:2px;
+  }
+  .about-link{
+    display:inline-block;
+    margin-top:24px;
+    color:var(--amber);
+    text-decoration:none;
+    font-weight:600;
+    font-size:14.5px;
+    border-bottom:1px solid var(--amber);
+  }
+
+  /* ---------- SERVICES ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:26px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:32px 26px;
+    position:relative;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px -18px rgba(20,33,61,0.35); }
+  .card-badge{
+    width:46px;height:46px;
+    border:1.5px solid var(--khaki);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--khaki);
+    margin-bottom:20px;
+  }
+  .card h3{ font-size:20px; font-weight:600; }
+  .card p{ font-size:14.5px; color:#454331; margin:12px 0 18px; }
+  .card .stat{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--cross);
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .card a.more{
+    display:block;
+    margin-top:14px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-section{ background:var(--paper-dark); }
+  .filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+  }
+  .chip{
+    font-family:var(--mono);
+    font-size:12.5px;
+    padding:8px 14px;
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--charcoal);
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .chip.active, .chip:hover{
+    background:var(--ink);
+    color:#fff;
+    border-color:var(--ink);
+  }
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  .gphoto{
+    aspect-ratio:4/5;
+    background:
+      linear-gradient(135deg, rgba(20,33,61,0.08), rgba(217,155,11,0.14)),
+      repeating-linear-gradient(45deg, rgba(20,33,61,0.05) 0 2px, transparent 2px 10px);
+    border:1px solid var(--line);
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:14px;
+    position:relative;
+  }
+  .gphoto .yr-tag{
+    position:absolute;
+    top:12px;left:12px;
+    font-family:var(--mono);
+    font-size:11px;
+    background:var(--ink);
+    color:#fff;
+    padding:3px 8px;
+  }
+  .gphoto .cap{
+    font-size:12.5px;
+    color:var(--ink);
+    font-weight:600;
+    line-height:1.35;
+    background:rgba(241,238,228,0.85);
+    padding:6px 8px;
+  }
+  .gphoto .loc{
+    font-size:11px;
+    color:var(--khaki);
+    font-family:var(--mono);
+    margin-top:2px;
+  }
+  .gallery-cta{ text-align:center; margin-top:38px; }
+
+  /* ---------- FINAL CTA ---------- */
+  .cta-band{
+    background:var(--amber);
+    text-align:center;
+  }
+  .cta-band .eyebrow{ justify-content:center; color:var(--ink); }
+  .cta-band .eyebrow::before{ background:var(--ink); }
+  .cta-band h2{
+    color:var(--ink);
+    font-size:clamp(1.9rem,3.4vw,2.7rem);
+    margin-top:12px;
+  }
+  .cta-band p{
+    max-width:50ch;
+    margin:16px auto 0;
+    color:#3D330B;
+  }
+  .cta-band .hero-ctas{ justify-content:center; margin-top:28px; }
+  .cta-band .btn-secondary{ border-color:var(--ink); }
+  .cta-band .btn-secondary:hover{ background:var(--ink); color:#fff; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#C9C9BA;
+    padding:64px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(237,233,218,0.15);
+  }
+  .footer-grid h4{
+    color:#fff;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid a{ text-decoration:none; font-size:14px; color:#C9C9BA; }
+  .footer-grid a:hover{ color:var(--amber); }
+  .footer-brand p{ font-size:14px; color:#A9A99A; max-width:32ch; }
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    font-size:12.5px;
+    color:#8C8C7E;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    nav.links{ display:none; }
+    .menu-btn{ display:block; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .seal-wrap{ order:-1; }
+    .seal{ width:180px;height:180px; }
+    .ledger-row{ grid-template-columns:repeat(2,1fr); }
+    .ledger-item:nth-child(3){ border-left:none; }
+    .about-grid{ grid-template-columns:1fr; gap:32px; }
+    .cards{ grid-template-columns:1fr; }
+    .gallery-grid{ grid-template-columns:repeat(2,1fr); }
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="brand">
+   
+       <img src="logopic.jpg" class="brand-mark">
+
+      Al Najaf Foundation
+    </a>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#involved">Get Involved</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a onclick="donate()" class="donate-btn">Donate</a>
+      <button class="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">On duty since 2008</p>
+        <h1>Sixteen years of <em>medical care</em>, relief, and community security.</h1>
+        <p class="lede">Al Najaf Foundation runs free medical camps, coordinates emergency relief, and provides security for public gatherings across our community every year since 2008, without pause.</p>
+        <div class="hero-ctas">
+          <a href="#gallery" class="btn-primary">See our impact</a>
+          <a href="#involved" class="btn-secondary">Become a volunteer</a>
+        </div>
+      </div>
+      <div class="seal-wrap">
+        <div class="seal">
+          <div class="seal-text">
+            <div class="est">Established</div>
+            <div class="yr">2008</div>
+            <div class="tag">Welfare · Relief · Security</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger">
+      <div class="wrap ledger-row">
+        <div class="ledger-item">
+          <div class="ledger-num">16+</div>
+          <div class="ledger-label">Years active, 2008 2026</div>
+        </div>
+        <div class="ledger-item">
+          <div class="ledger-num">500+</div>
+          <div class="ledger-label">Medical camps held</div>
+        </div>
+        <div class="ledger-item">
+          <div class="ledger-num">120K+</div>
+          <div class="ledger-label">People served</div>
+        </div>
+        <div class="ledger-item">
+          <div class="ledger-num">85+</div>
+          <div class="ledger-label">Relief & security operations</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SNAPSHOT -->
+  <section class="about-snap" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Our story</p>
+        <h2>Built one camp at a time, since 2008.</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Al Najaf Foundation started in 2008 as a handful of volunteers running weekend health checkups in one neighbourhood. Today we operate year-round: medical camps, emergency relief drives, and trained security teams that support public events and crisis response.</p>
+          <p>Our work stands on one belief  a community is strongest when it looks after its own. Every camp, every relief drop, every shift on duty is logged, reported, and open to the people we serve.</p>
+          <a href="#" class="about-link">Read our full history →</a>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="yr">2008</div>
+            <div class="desc">First medical camp held with 4 volunteers.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="yr">2013</div>
+            <div class="desc">Security & relief division formally established.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="yr">2019</div>
+            <div class="desc">100th medical camp; mobile health unit launched.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="yr">2026</div>
+            <div class="desc">500+ camps, operating in 12 districts.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2>Three kinds of work, one purpose.</h2>
+        <p>Every service below is run by trained volunteers and staff, funded entirely by community donations.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-badge">MC</div>
+          <h3>Medical Assistance</h3>
+          <p>Free health checkups, medicine distribution, and specialist camps held across neighbourhoods with limited access to care.</p>
+          <div class="stat">500+ camps · 120,000+ patients seen</div>
+          <a href="#" class="more">Learn more →</a>
+        </div>
+        <div class="card">
+          <div class="card-badge">SR</div>
+          <h3>Security & Relief Operations</h3>
+          <p>Trained teams providing security cover for public events, and rapid-response relief during emergencies and natural disasters.</p>
+          <div class="stat">85+ operations since 2013</div>
+          <a href="#" class="more">Learn more →</a>
+        </div>
+        <div class="card">
+          <div class="card-badge">CP</div>
+          <h3>Community Projects</h3>
+          <p>Clean water drives, school supply distribution, and winter relief packages for families across our operating districts.</p>
+          <div class="stat">12 districts covered</div>
+          <a href="#" class="more">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-section" id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Field record, 2008 2026</p>
+        <h2>Photo gallery</h2>
+        <p>Browse camps, relief drives, and operations by year. Placeholder frames shown below — replace with high-resolution photos before launch.</p>
+      </div>
+
+      <div class="filters" role="tablist" aria-label="Filter gallery by year">
+        <button class="chip active" data-year="all">All years</button>
+        <button class="chip" data-year="2008">2008</button>
+        <button class="chip" data-year="2013">2013</button>
+        <button class="chip" data-year="2016">2016</button>
+        <button class="chip" data-year="2019">2019</button>
+        <button class="chip" data-year="2022">2022</button>
+        <button class="chip" data-year="2026">2026</button>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gphoto" data-year="2008">
+          <span class="yr-tag">2008</span>
+          <div>
+            
+            <div class="cap">First Medical Camp</div>
+            <div class="loc">Karachi March 2008</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2013">
+          <span class="yr-tag">2013</span>
+          <div>
+            <div class="cap">Relief Drive, Flood Response</div>
+            <div class="loc">Sindh August 2013</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2016">
+          <span class="yr-tag">2016</span>
+          <div>
+            <div class="cap">Free Eye Camp</div>
+            <div class="loc">Karachi November 2016</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2019">
+          <span class="yr-tag">2019</span>
+          <div>
+            <div class="cap">100th Medical Camp</div>
+            <div class="loc">Karachi June 2019</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2019">
+          <span class="yr-tag">2019</span>
+          <div>
+            <div class="cap">Event Security Detail</div>
+            <div class="loc">Karachi December 2019</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2022">
+          <span class="yr-tag">2022</span>
+          <div>
+            <div class="cap">Winter Relief Distribution</div>
+            <div class="loc">Thatta January 2022</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2022">
+          <span class="yr-tag">2022</span>
+          <div>
+            <div class="cap">Mobile Health Unit Launch</div>
+            <div class="loc">Hyderabad July 2022</div>
+          </div>
+        </div>
+        <div class="gphoto" data-year="2026">
+
+    <img src="https://res.cloudinary.com/ddviuaaca/image/upload/v1786102874/IMG_2879_qv8bhw.jpg" alt="500th Medical Camp">
+
+    <span class="yr-tag">2026</span>
+
+    <div class="info">
+        <div class="cap">500th Medical Camp</div>
+        <div class="loc">Karachi February 2026</div>
+    </div>
+
+</div>
+      </div>
+
+      <div class="gallery-cta">
+        <a onclick="moreimage()" class="btn-secondary">View full gallery →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band" id="involved">
+    <div class="wrap">
+      <p class="eyebrow">Get involved</p>
+      <h2>Your time or your donation both keep a camp running.</h2>
+      <p>Every rupee and every hour goes directly to camps, relief drives, and the teams who show up for them. No overhead deductions, ever.</p>
+      <div class="hero-ctas">
+        <a onclick="donate()" class="btn-primary">Donate now</a>
+        <a href="#contact" class="btn-secondary">Volunteer with us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Al Najaf Foundation</h4>
+        <p>Medical care, relief, and community security serving our neighbourhoods since 2008.</p>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#">Annual reports</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a onclick="donate()">Donate</a></li>
+          <li><a href="#">Volunteer</a></li>
+          <li><a href="#">Partner with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+92210000000">+92 21 0000 000</a></li>
+          <li><a href="mailto:info@amaanfoundation.org">info@amaanfoundation.org</a></li>
+          <li><a href="#">Karachi, Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Amaan Foundation. All rights reserved.</span>
+      <span>Registered non-profit · Est. 2008</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Gallery year filter
+  const chips = document.querySelectorAll('.chip');
+  const photos = document.querySelectorAll('#galleryGrid .gphoto');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const year = chip.dataset.year;
+      photos.forEach(photo => {
+        const show = year === 'all' || photo.dataset.year === year;
+        photo.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // Mobile menu toggle (simple show/hide of nav links)
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('nav.links');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    if(isOpen){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '74px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'var(--paper)';
+      navLinks.style.padding = '20px 24px';
+      navLinks.style.borderBottom = '1px solid var(--line)';
+      navLinks.style.gap = '18px';
+    }
+  });
+
+
+  function moreimage(){
+    window.location.href="galery.html"
+  }
+  function donate(){
+window.location.href='donation.html'
+
+  }
+</script>
+
+</body>
+</html>
