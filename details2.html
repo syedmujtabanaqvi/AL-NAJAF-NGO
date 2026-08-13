@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Assistance — Service Details | Al Najaf Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;
+    --khaki:#5A5335;
+    --khaki-light:#EDE7D3;
+    --amber:#D99B0B;
+    --cross:#A3213A;
+    --paper:#F1EEE4;
+    --paper-dark:#E7E1CE;
+    --charcoal:#242217;
+    --line: rgba(20,33,61,0.14);
+    --display: 'Fraunces', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--display);
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--khaki);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1.5px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  button, .btn{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    border-radius:2px;
+  }
+  button:focus-visible, a:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(241,238,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:74px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:32px;height:32px;
+    border-radius:50%;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--ink);
+  }
+  nav.links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--charcoal);
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .18s ease, color .18s ease;
+  }
+  nav.links a:hover, nav.links a.active{ border-color:var(--amber); color:var(--ink); }
+
+  .nav-actions{ display:flex; align-items:center; gap:18px; }
+  .donate-btn{
+    background:var(--cross);
+    color:#fff;
+    padding:10px 20px;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    display:inline-block;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .donate-btn:hover{ background:#8a1a2f; transform:translateY(-1px); }
+
+  .menu-btn{ display:none; background:none; padding:8px; }
+  .menu-btn span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
+
+  /* ---------- PAGE HERO ---------- */
+  .service-hero{
+    padding:60px 0 50px;
+    background:var(--paper-dark);
+    border-bottom:1px solid var(--line);
+  }
+  .service-hero-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:48px;
+    align-items:center;
+  }
+  .service-hero h1{
+    font-size:clamp(2.2rem, 3.8vw, 3.2rem);
+    margin-top:12px;
+  }
+  .service-hero p.lead{
+    font-size:17px;
+    color:#454331;
+    margin-top:16px;
+    line-height:1.6;
+  }
+  .hero-meta{
+    display:flex;
+    gap:24px;
+    margin-top:28px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+  }
+  .meta-item{
+    font-family:var(--mono);
+    font-size:13px;
+  }
+  .meta-item span{
+    display:block;
+    color:var(--cross);
+    font-size:20px;
+    font-weight:600;
+  }
+
+  .service-badge-card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:32px;
+  }
+  .service-badge-card h3{
+    font-size:20px;
+    margin-bottom:12px;
+  }
+  .service-badge-card p{
+    font-size:14px;
+    color:#454331;
+    margin-bottom:20px;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:#fff;
+    padding:12px 24px;
+    text-decoration:none;
+    display:inline-block;
+    font-weight:600;
+    transition:background .18s ease;
+  }
+  .btn-primary:hover{ background:#0d1730; }
+
+  /* ---------- MAIN CONTENT ---------- */
+  .service-content{ padding:80px 0; }
+  .content-grid{
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+    gap:56px;
+    align-items:start;
+  }
+
+  .detail-block{ margin-bottom:48px; }
+  .detail-block h2{ font-size:26px; margin-bottom:16px; }
+  .detail-block p{ font-size:16px; color:#454331; line-height:1.65; margin-bottom:16px; }
+
+  /* Feature Checklist */
+  .feature-list{
+    list-style:none;
+    padding:0;
+    margin:24px 0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .feature-list li{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:16px;
+    font-size:14.5px;
+    font-weight:500;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .feature-list li::before{
+    content:"✓";
+    font-family:var(--mono);
+    color:var(--cross);
+    font-weight:bold;
+  }
+
+  /* Workflow Steps */
+  .workflow-list{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-top:24px;
+  }
+  .step-item{
+    display:flex;
+    gap:16px;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:20px;
+  }
+  .step-num{
+    font-family:var(--mono);
+    font-size:18px;
+    font-weight:bold;
+    color:var(--amber);
+    background:var(--paper-dark);
+    width:40px;
+    height:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  .step-info h4{ font-size:17px; margin-bottom:4px; }
+  .step-info p{ font-size:14px; margin:0; color:#454331; }
+
+  /* Sidebar info box */
+  .sidebar-box{
+    background:var(--paper-dark);
+    border:1px solid var(--line);
+    padding:28px;
+    position:sticky;
+    top:100px;
+  }
+  .sidebar-box h3{ font-size:20px; margin-bottom:16px; }
+  .sidebar-box ul{
+    list-style:none;
+    padding:0;
+    margin:0 0 24px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    font-size:14px;
+  }
+  .sidebar-box li{
+    display:flex;
+    justify-content:space-between;
+    border-bottom:1px dashed var(--line);
+    padding-bottom:8px;
+  }
+  .sidebar-box li span:first-child{ color:var(--khaki); font-family:var(--mono); }
+  .sidebar-box li span:last-child{ font-weight:600; color:var(--ink); }
+
+  /* ---------- SUGGESTIONS SECTION ---------- */
+  .suggestions-section{
+    background:var(--paper-dark);
+    padding:80px 0;
+    border-top:1px solid var(--line);
+  }
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:26px;
+    margin-top:36px;
+  }
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:32px 26px;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 14px 30px -18px rgba(20,33,61,0.35); }
+  .card-badge{
+    width:46px;height:46px;
+    border:1.5px solid var(--khaki);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--khaki);
+    margin-bottom:20px;
+  }
+  .card h3{ font-size:20px; font-weight:600; }
+  .card p{ font-size:14.5px; color:#454331; margin:12px 0 18px; }
+  .card .stat{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--cross);
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .card a.more{
+    display:block;
+    margin-top:14px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--ink);
+    text-decoration:none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#C9C9BA;
+    padding:64px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(237,233,218,0.15);
+  }
+  .footer-grid h4{
+    color:#fff;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid a{ text-decoration:none; font-size:14px; color:#C9C9BA; }
+  .footer-grid a:hover{ color:var(--amber); }
+  .footer-brand p{ font-size:14px; color:#A9A99A; max-width:32ch; }
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    font-size:12.5px;
+    color:#8C8C7E;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    nav.links{ display:none; }
+    .menu-btn{ display:block; }
+    .service-hero-grid, .content-grid{ grid-template-columns:1fr; gap:32px; }
+    .feature-list{ grid-template-columns:1fr; }
+    .cards{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">AF</span>
+      Al Najaf Foundation
+    </a>
+    <nav class="links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services" class="active">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="team.html">Our Team</a>
+      <a href="donate.html">Donate</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="donate.html" class="donate-btn">Donate</a>
+      <button class="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- SERVICE HERO -->
+  <section class="service-hero">
+    <div class="wrap service-hero-grid">
+      <div>
+        <p class="eyebrow">Service Overview</p>
+        <h1>Medical Assistance & Free Health Camps</h1>
+        <p class="lead">Hamara maqsad un ilaqon tak muft medical facilities aur medicines pahanchana hai jahan pehlay se basic healthcare tak rasai mushkil hai. 2008 se ab tak hum 500 se zyada successful medical camps organize kar chukay hain.</p>
+        
+        <div class="hero-meta">
+          <div class="meta-item">
+            <span>500+</span> Camps Organized
+          </div>
+          <div class="meta-item">
+            <span>120K+</span> Patients Treated
+          </div>
+          <div class="meta-item">
+            <span>12</span> Districts Covered
+          </div>
+        </div>
+      </div>
+
+      <div class="service-badge-card">
+        <h3>Support This Program</h3>
+        <p>Aap ki choti si donation se ek zarooratmand patient ko muft medicines aur specialist consultation faraham ki jaati hai.</p>
+        <a href="donate.html" class="btn-primary">Sponsor A Camp →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN SERVICE DETAILS -->
+  <section class="service-content">
+    <div class="wrap content-grid">
+      
+      <div>
+        <div class="detail-block">
+          <h2>About The Medical Assistance Program</h2>
+          <p>Al Najaf Foundation ke under chalne wala Medical Assistance Program un Tamam mustahiq afrad ko target karta hai jo high medical treatment costs ki wajah se apna checkup nahi karwa pate. Hum professional doctors, qualified staff, aur lab technicians ke sath mil kar weekend aur weekly bases par free medical camps set up karte hain.</p>
+          <p>Har camp me general health checkup ke sath sath specialized care jese Eye Checkups, Blood Pressure, Diabetes Testing, aur Free Medicine Distribution shamil hoti hai.</p>
+        </div>
+
+        <div class="detail-block">
+          <h2>Key Features & Services Included</h2>
+          <ul class="feature-list">
+            <li>Free General Physician Consultation</li>
+            <li>Free Prescription Medicines</li>
+            <li>Eye Specialist Camps & Spectacles</li>
+            <li>Diabetes & Hypertension Screening</li>
+            <li>Mobile Medical Unit for Remote Areas</li>
+            <li>Emergency First Aid & Patient Referral</li>
+          </ul>
+        </div>
+
+        <div class="detail-block">
+          <h2>How Our Medical Camp Operates</h2>
+          <div class="workflow-list">
+            <div class="step-item">
+              <div class="step-num">01</div>
+              <div class="step-info">
+                <h4>Area Survey & Need Assessment</h4>
+                <p>Team pehlay zarooratmand ilaqon ka survey karti hai jahan healthcare facilities kam hon.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">02</div>
+              <div class="step-info">
+                <h4>Medical Team & Medicine Setup</h4>
+                <p>Qualified doctors, medics, aur required medicines ka stock mobilize kiya jata hai.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">03</div>
+              <div class="step-info">
+                <h4>Patient Registration & Triage</h4>
+                <p>Ground volunteers patients ko register karte hain aur orderly fashion me doctors tak bhejte hain.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-num">04</div>
+              <div class="step-info">
+                <h4>Free Diagnosis & Pharmacy</h4>
+                <p>Doctor ke checkup ke baad exact prescribed medicines free pharmacy counter se di jati hain.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside>
+        <div class="sidebar-box">
+          <h3>Quick Program Info</h3>
+          <ul>
+            <li><span>Established:</span> <span>2008</span></li>
+            <li><span>Operation Days:</span> <span>Weekends / On-Demand</span></li>
+            <li><span>Location:</span> <span>Karachi & Rural Sindh</span></li>
+            <li><span>Volunteer Team:</span> <span>40+ Medics & Staff</span></li>
+            <li><span>Funding:</span> <span>100% Community Funded</span></li>
+          </ul>
+          <a href="donate.html" class="btn-primary" style="width:100%; text-align:center;">Donate For Medicines</a>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- SUGGESTIONS SECTION (OTHER SERVICES) -->
+  <section class="suggestions-section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">More Programs</p>
+        <h2>Other Services You Might Be Interested In</h2>
+      </div>
+
+      <div class="cards">
+        <!-- Suggestion 1 -->
+        <div class="card">
+          <div class="card-badge">SR</div>
+          <h3>Security & Relief Operations</h3>
+          <p>Trained teams providing security cover for public events, and rapid-response relief during emergencies and natural disasters.</p>
+          <div class="stat">85+ operations since 2013</div>
+          <a href="#" class="more">Explore Relief Services →</a>
+        </div>
+
+        <!-- Suggestion 2 -->
+        <div class="card">
+          <div class="card-badge">CP</div>
+          <h3>Community Projects</h3>
+          <p>Clean water drives, school supply distribution, and winter relief packages for families across our operating districts.</p>
+          <div class="stat">12 districts covered</div>
+          <a href="#" class="more">Explore Community Projects →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Amaan Foundation</h4>
+        <p>Medical care, relief, and community security — serving our neighbourhoods since 2008.</p>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="index.html#involved">Volunteer</a></li>
+          <li><a href="#">Partner with us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+92210000000">+92 21 0000 000</a></li>
+          <li><a href="mailto:info@amaanfoundation.org">info@amaanfoundation.org</a></li>
+          <li><a href="#">Karachi, Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Amaan Foundation. All rights reserved.</span>
+      <span>Registered non-profit · Est. 2008</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('nav.links');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    if(isOpen){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '74px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'var(--paper)';
+      navLinks.style.padding = '20px 24px';
+      navLinks.style.borderBottom = '1px solid var(--line)';
+      navLinks.style.gap = '18px';
+    }
+  });
+</script>
+
+</body>
+</html>

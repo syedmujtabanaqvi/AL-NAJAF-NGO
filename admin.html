@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Al Najaf Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;
+    --khaki:#5A5335;
+    --khaki-light:#EDE7D3;
+    --amber:#D99B0B;
+    --cross:#A3213A;
+    --paper:#F1EEE4;
+    --paper-dark:#E7E1CE;
+    --charcoal:#242217;
+    --line: rgba(20,33,61,0.14);
+    --display: 'Fraunces', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Admin Header / Topbar */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--ink);
+    color:#fff;
+    border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:64px;
+    padding:0 24px;
+  }
+  .admin-brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:var(--display);
+    font-size:18px;
+    color:#fff;
+    text-decoration:none;
+  }
+  .admin-badge{
+    font-family:var(--mono);
+    font-size:10px;
+    background:var(--amber);
+    color:var(--ink);
+    padding:2px 6px;
+    text-transform:uppercase;
+    font-weight:bold;
+  }
+  .topbar-actions{
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .btn-logout{
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.3);
+    color:#fff;
+    padding:6px 14px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .btn-logout:hover{ background:rgba(255,255,255,0.1); }
+
+  /* Admin Layout */
+  .admin-wrapper{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    min-height:calc(100vh - 64px);
+  }
+
+  /* Sidebar Nav */
+  aside.sidebar{
+    background:var(--paper-dark);
+    border-right:1px solid var(--line);
+    padding:24px 0;
+  }
+  .sidebar-menu{
+    list-style:none;
+    padding:0;
+    margin:0;
+  }
+  .sidebar-menu li a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 24px;
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--charcoal);
+    border-left:3px solid transparent;
+    transition:all .18s ease;
+  }
+  .sidebar-menu li a:hover, .sidebar-menu li a.active{
+    background:#fff;
+    border-left-color:var(--cross);
+    color:var(--ink);
+  }
+
+  /* Main Dashboard Area */
+  main.admin-main{
+    padding:36px;
+    overflow-y:auto;
+  }
+
+  .page-title{
+    margin-bottom:28px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .page-title h1{ font-size:28px; }
+
+  /* Stats Grid */
+  .stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    margin-bottom:36px;
+  }
+  .stat-card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:20px;
+  }
+  .stat-card .label{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--khaki);
+    text-transform:uppercase;
+  }
+  .stat-card .num{
+    font-family:var(--mono);
+    font-size:28px;
+    font-weight:600;
+    color:var(--ink);
+    margin-top:6px;
+  }
+  .stat-card .num.highlight{ color:var(--cross); }
+
+  /* Content Cards / Tables */
+  .panel-box{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:28px;
+    margin-bottom:32px;
+  }
+  .panel-box h3{
+    font-size:20px;
+    margin-bottom:20px;
+    padding-bottom:12px;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+
+  /* Data Tables */
+  table.data-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  table.data-table th, table.data-table td{
+    padding:12px 14px;
+    text-align:left;
+    border-bottom:1px solid var(--line);
+  }
+  table.data-table th{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--khaki);
+    text-transform:uppercase;
+    background:var(--paper);
+  }
+  table.data-table tr:hover{ background:var(--paper-dark); }
+
+  /* Status Badges */
+  .status{
+    font-family:var(--mono);
+    font-size:11px;
+    padding:3px 8px;
+    display:inline-block;
+    text-transform:uppercase;
+  }
+  .status.pending{ background:#FFEAA7; color:#D63031; }
+  .status.verified{ background:#55E6C1; color:#1B9CFC; }
+
+  /* Buttons */
+  .btn-sm{
+    font-size:12px;
+    padding:6px 12px;
+    cursor:pointer;
+    border:none;
+    font-family:var(--mono);
+  }
+  .btn-action{ background:var(--ink); color:#fff; }
+  .btn-action:hover{ background:var(--amber); color:var(--ink); }
+
+  /* Forms */
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .form-group{ margin-bottom:16px; }
+  .form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+  .form-group input, .form-group select, .form-group textarea{
+    width:100%;
+    padding:10px 12px;
+    font-size:14px;
+    border:1px solid var(--line);
+    background:var(--paper);
+  }
+
+  /* Tabs functionality */
+  .tab-content{ display:none; }
+  .tab-content.active{ display:block; }
+
+  /* Responsive */
+  @media (max-width:920px){
+    .admin-wrapper{ grid-template-columns:1fr; }
+    aside.sidebar{ display:none; }
+    .stats-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <a href="#" class="admin-brand">
+      Al Najaf Foundation
+      <span class="admin-badge">Admin Panel</span>
+    </a>
+    <div class="topbar-actions">
+      <span style="font-size:13px; opacity:0.8;">Welcome, Admin</span>
+      <a href="index.html" class="btn-logout" style="text-decoration:none;">View Site ↗</a>
+    </div>
+  </div>
+</header>
+
+<div class="admin-wrapper">
+
+  <!-- SIDEBAR NAV -->
+  <aside class="sidebar">
+    <ul class="sidebar-menu">
+      <li><a href="#" class="active" onclick="switchTab(event, 'donationsTab')">💰 Donations & Receipts</a></li>
+      <li><a href="#" onclick="switchTab(event, 'galleryTab')">🖼️ Manage Gallery</a></li>
+      <li><a href="#" onclick="switchTab(event, 'teamTab')">👥 Manage Team</a></li>
+      <li><a href="#" onclick="teamdetail()">👥Team Detail </a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN DASHBOARD CONTENT -->
+  <main class="admin-main">
+
+    <!-- TOP STATS COUNTERS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">Total Donations</div>
+        <div class="num highlight">PKR 145,000</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Pending Verification</div>
+        <div class="num">3 Receipts</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Gallery Photos</div>
+        <div class="num">24 Active</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Total Volunteers</div>
+        <div class="num">18 Members</div>
+      </div>
+    </div>
+
+    <!-- TAB 1: DONATIONS & RECEIPT VERIFICATION -->
+    <div id="donationsTab" class="tab-content active">
+      <div class="panel-box">
+        <h3>Recent Donations & Payment Screenshots</h3>
+        
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Donor Name</th>
+              <th>Amount</th>
+              <th>Phone</th>
+              <th>Screenshot</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>12 Feb 2026</td>
+              <td>Syed Kazim Raza</td>
+              <td><strong>PKR 5,000</strong></td>
+              <td>0300-1234567</td>
+              <td><a href="https://res.cloudinary.com/ddviuaaca/image/upload/v1786102874/IMG_2879_qv8bhw.jpg" target="_blank" style="color:var(--cross);">View Receipt ↗</a></td>
+              <td><span class="status pending">Pending</span></td>
+              <td><button class="btn-sm btn-action" onclick="verifyDonation(this)">Approve</button></td>
+            </tr>
+            <tr>
+              <td>10 Feb 2026</td>
+              <td>Muhammad Ali</td>
+              <td><strong>PKR 10,000</strong></td>
+              <td>0321-9876543</td>
+              <td><a href="#" style="color:var(--cross);">View Receipt ↗</a></td>
+              <td><span class="status verified">Verified</span></td>
+              <td><button class="btn-sm" disabled style="opacity:0.5;">Verified</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: MANAGE GALLERY -->
+    <div id="galleryTab" class="tab-content">
+      <div class="panel-box">
+        <h3>Add New Photo to Gallery</h3>
+        <form onsubmit="addGalleryPhoto(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Photo Title / Caption</label>
+              <input type="text" placeholder="e.g. Free Eye Camp 2026" required>
+            </div>
+            <div class="form-group">
+              <label>Location & Date</label>
+              <input type="text" placeholder="e.g. Karachi — Feb 2026" required>
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select>
+                <option value="medical">Medical Camp</option>
+                <option value="relief">Relief Drive</option>
+                <option value="security">Security Detail</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Year</label>
+              <input type="number" value="2026">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Image URL (Cloudinary / Direct Link)</label>
+            <input type="url" placeholder="https://res.cloudinary.com/..." required>
+          </div>
+          <button type="submit" class="btn-sm btn-action" style="padding:12px 20px;">Upload to Gallery</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 3: MANAGE TEAM -->
+    <div id="teamTab" class="tab-content">
+      <div class="panel-box">
+        <h3>Add New Team Member / Volunteer</h3>
+        <form onsubmit="addTeamMember(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" placeholder="e.g. Ahmed Raza" required>
+            </div>
+            <div class="form-group">
+              <label>Role / Designation</label>
+              <input type="text" placeholder="e.g. Security Lead" required>
+            </div>
+            <div class="form-group">
+              <label>Department</label>
+              <select>
+                <option value="medical">Medical</option>
+                <option value="security">Security</option>
+                <option value="relief">Relief & Logistics</option>
+                <option value="media">Media & IT</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" placeholder="Karachi">
+            </div>
+          </div>
+          <button type="submit" class="btn-sm btn-action" style="padding:12px 20px;">Save Team Member</button>
+        </form>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Sidebar tab switching logic
+  function switchTab(evt, tabId) {
+    evt.preventDefault();
+    
+    // Deactivate all tabs & content
+    document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    
+    // Activate clicked tab
+    evt.currentTarget.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  // Verify donation handler
+  function verifyDonation(btn) {
+    const row = btn.closest('tr');
+    const statusTag = row.querySelector('.status');
+    statusTag.textContent = 'Verified';
+    statusTag.className = 'status verified';
+    btn.textContent = 'Verified';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    alert('Donation status updated to Verified!');
+  }
+
+  // Dummy submit handlers
+  function addGalleryPhoto(e) {
+    e.preventDefault();
+    alert('New photo successfully added to Gallery!');
+    e.target.reset();
+  }
+
+  function addTeamMember(e) {
+    e.preventDefault();
+    alert('New Team Member added!');
+    e.target.reset();
+  }
+
+  function teamdetail(){
+
+    window.location.href='teamadmin.html'
+
+  }
+
+</script>
+
+</body>
+</html>
