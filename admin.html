@@ -285,7 +285,7 @@
     <div class="stats-grid">
       <div class="stat-card">
         <div class="label">Total Donations</div>
-        <div class="num highlight">PKR 145,000</div>
+        <div class="num highlight" id="TotalDonations">...</div>
       </div>
       <div class="stat-card">
         <div class="label">Pending Verification</div>
@@ -458,6 +458,19 @@
     window.location.href='teamadmin.html'
 
   }
+
+ //Total Donations
+
+fetch('http://localhost:5000/totaldonation')
+        .then(res => res.json())
+        .then(data => {
+            let TOTALAMOUNT = data.TOTALAMOUNT;
+            document.getElementById("TotalDonations").innerText = TOTALAMOUNT;
+        });
+
+
+
+
 
 </script>
 

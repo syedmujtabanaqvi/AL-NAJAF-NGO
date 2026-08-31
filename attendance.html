@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volunteers Attendance History — Al Najaf Foundation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14213D;
+    --khaki:#5A5335;
+    --khaki-light:#EDE7D3;
+    --amber:#D99B0B;
+    --cross:#A3213A;
+    --paper:#F1EEE4;
+    --paper-dark:#E7E1CE;
+    --charcoal:#242217;
+    --line: rgba(20,33,61,0.14);
+    --display: 'Fraunces', serif;
+    --body: 'IBM Plex Sans', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:var(--body);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  h1,h2,h3,h4{
+    font-family:var(--display);
+    color:var(--ink);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--khaki);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1.5px;
+    background:var(--amber);
+    display:inline-block;
+  }
+
+  button, .btn{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    border:none;
+    border-radius:2px;
+  }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible{
+    outline:3px solid var(--amber);
+    outline-offset:2px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(241,238,228,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:74px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--display);
+    font-weight:600;
+    font-size:20px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .brand-mark{
+    width:32px;height:32px;
+    border-radius:50%;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:10px;
+    color:var(--ink);
+  }
+  nav.links{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    margin:0;padding:0;
+  }
+  nav.links a{
+    text-decoration:none;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--charcoal);
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:border-color .18s ease, color .18s ease;
+  }
+  nav.links a:hover, nav.links a.active{ border-color:var(--amber); color:var(--ink); }
+
+  .nav-actions{ display:flex; align-items:center; gap:18px; }
+  .donate-btn{
+    background:var(--cross);
+    color:#fff;
+    padding:10px 20px;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:0.02em;
+    display:inline-block;
+    transition:background .18s ease, transform .18s ease;
+  }
+  .donate-btn:hover{ background:#8a1a2f; transform:translateY(-1px); }
+
+  .menu-btn{ display:none; background:none; padding:8px; }
+  .menu-btn span{ display:block; width:22px; height:2px; background:var(--ink); margin:5px 0; }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-header{
+    padding:60px 0 40px;
+    background:var(--paper-dark);
+    border-bottom:1px solid var(--line);
+  }
+  .page-header h1{
+    font-size:clamp(2.2rem, 3.8vw, 3.2rem);
+    margin-top:12px;
+  }
+  .page-header p{
+    color:#454331;
+    font-size:16.5px;
+    max-width:62ch;
+    margin-top:12px;
+  }
+
+  /* ---------- ATTENDANCE CONTENT ---------- */
+  .attendance-page{ padding:60px 0 88px; }
+
+  /* Controls & Search Bar */
+  .controls-card{
+    background:#fff;
+    border:1px solid var(--line);
+    padding:20px;
+    margin-bottom:28px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .search-box{
+    display:flex;
+    gap:12px;
+    flex-grow:1;
+    max-width:500px;
+  }
+  .search-box input, .filter-box select{
+    width:100%;
+    padding:10px 14px;
+    font-family:var(--body);
+    font-size:14px;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+  }
+
+  /* Attendance List Table */
+  .table-box{
+    background:#fff;
+    border:1px solid var(--line);
+    overflow-x:auto;
+  }
+  table.attendance-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+    text-align:left;
+  }
+  table.attendance-table th, table.attendance-table td{
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  table.attendance-table th{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--khaki);
+    text-transform:uppercase;
+    background:var(--paper-dark);
+  }
+  table.attendance-table tbody tr{
+    cursor:pointer;
+    transition:background .18s ease;
+  }
+  table.attendance-table tbody tr:hover{ 
+    background:var(--paper); 
+  }
+
+  .badge-dept{
+    font-family:var(--mono);
+    font-size:11px;
+    background:var(--ink);
+    color:#fff;
+    padding:3px 8px;
+    text-transform:uppercase;
+  }
+
+  .attendance-percent{
+    font-family:var(--mono);
+    font-weight:600;
+    color:#27ae60;
+  }
+
+  .view-link{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--cross);
+    font-weight:600;
+  }
+
+  /* ---------- MODAL FOR DETAILED HISTORY ---------- */
+  .modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:100;
+    background:rgba(20,33,61,0.85);
+    backdrop-filter:blur(4px);
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .modal.active{ display:flex; }
+  .modal-content{
+    max-width:750px;
+    width:100%;
+    background:var(--paper);
+    border:1px solid var(--line);
+    position:relative;
+    padding:32px;
+    max-height:85vh;
+    overflow-y:auto;
+  }
+  .modal-close{
+    position:absolute;
+    top:16px; right:16px;
+    background:var(--ink);
+    color:#fff;
+    width:32px; height:32px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:18px; cursor:pointer;
+  }
+  
+  .history-header{
+    margin-bottom:24px;
+    padding-bottom:16px;
+    border-bottom:1px solid var(--line);
+  }
+  .history-header h3{ font-size:24px; }
+  .history-meta{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--khaki);
+    margin-top:6px;
+  }
+
+  /* Status Badges */
+  .status-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    padding:3px 8px;
+    font-weight:bold;
+    text-transform:uppercase;
+  }
+  .status-tag.p{ background:#E8F8F5; color:#27ae60; border:1px solid #27ae60; }
+  .status-tag.l{ background:#FEF9E7; color:var(--amber); border:1px solid var(--amber); }
+  .status-tag.a{ background:#FDEDEC; color:var(--cross); border:1px solid var(--cross); }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:#C9C9BA;
+    padding:64px 0 28px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(237,233,218,0.15);
+  }
+  .footer-grid h4{
+    color:#fff;
+    font-family:var(--body);
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin:0 0 16px;
+  }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
+  .footer-grid a{ text-decoration:none; font-size:14px; color:#C9C9BA; }
+  .footer-grid a:hover{ color:var(--amber); }
+  .footer-brand p{ font-size:14px; color:#A9A99A; max-width:32ch; }
+  .foot-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-top:24px;
+    font-size:12.5px;
+    color:#8C8C7E;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:768px){
+    nav.links{ display:none; }
+    .menu-btn{ display:block; }
+    .controls-card{ flex-direction:column; align-items:stretch; }
+    .search-box{ max-width:100%; }
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:32px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">AF</span>
+      Al Najaf Foundation
+    </a>
+    <nav class="links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#services">Services</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="team.html">Our Team</a>
+      <a href="attendance-history.html" class="active">Attendance History</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="donate.html" class="donate-btn">Donate</a>
+      <button class="menu-btn" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="wrap">
+      <p class="eyebrow">Volunteers Record</p>
+      <h1>Attendance Directory</h1>
+      <p>Niche majood kisi bhi volunteer ke naam par click karke uski complete camp duty aur attendance history dekhein.</p>
+    </div>
+  </section>
+
+  <!-- ATTENDANCE MAIN DIRECTORY -->
+  <section class="attendance-page">
+    <div class="wrap">
+
+      <!-- SEARCH & FILTER BAR -->
+      <div class="controls-card">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search volunteer by name or ID..." onkeyup="filterVolunteers()">
+        </div>
+
+        <div class="filter-box">
+          <select id="deptFilter" onchange="filterVolunteers()">
+            <option value="all">All Departments</option>
+            <option value="Medical">Medical</option>
+            <option value="Security">Security</option>
+            <option value="Relief">Relief & Logistics</option>
+            <option value="Media">Media & IT</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- VOLUNTEERS OVERVIEW TABLE -->
+      <div class="table-box">
+        <table class="attendance-table" id="volunteersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Volunteer Name</th>
+              <th>Department</th>
+              <th>Total Duties</th>
+              <th>Present Days</th>
+              <th>Attendance Rate</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr onclick="volunteerhistory()">
+              <td style="font-family:var(--mono);">#VOL-01</td>
+              <td><strong>Syed Ali Hassan</strong></td>
+              <td><span class="badge-dept">Medical</span></td>
+              <td>15 Days</td>
+              <td>14 Days</td>
+              <td><span class="attendance-percent">93%</span></td>
+              <td><span class="view-link">View History →</span></td>
+            </tr>
+
+            <tr onclick="openHistory('Muhammad Raza', '#VOL-02', 'Security', '20', '19', '95%', historyRaza)">
+              <td style="font-family:var(--mono);">#VOL-02</td>
+              <td><strong>Muhammad Raza</strong></td>
+              <td><span class="badge-dept">Security</span></td>
+              <td>20 Days</td>
+              <td>19 Days</td>
+              <td><span class="attendance-percent">95%</span></td>
+              <td><span class="view-link">View History →</span></td>
+            </tr>
+
+            <tr onclick="openHistory('Ahmed Raza Shah', '#VOL-03', 'Relief', '12', '10', '83%', historyAhmed)">
+              <td style="font-family:var(--mono);">#VOL-03</td>
+              <td><strong>Ahmed Raza Shah</strong></td>
+              <td><span class="badge-dept">Relief</span></td>
+              <td>12 Days</td>
+              <td>10 Days</td>
+              <td><span class="attendance-percent">83%</span></td>
+              <td><span class="view-link">View History →</span></td>
+            </tr>
+
+            <tr onclick="openHistory('Zain Ul Abideen', '#VOL-04', 'Media', '18', '16', '88%', historyZain)">
+              <td style="font-family:var(--mono);">#VOL-04</td>
+              <td><strong>Zain Ul Abideen</strong></td>
+              <td><span class="badge-dept">Media</span></td>
+              <td>18 Days</td>
+              <td>16 Days</td>
+              <td><span class="attendance-percent">88%</span></td>
+              <td><span class="view-link">View History →</span></td>
+            </tr>
+
+            <tr onclick="openHistory('Usman Khan', '#VOL-05', 'Medical', '10', '10', '100%', historyUsman)">
+              <td style="font-family:var(--mono);">#VOL-05</td>
+              <td><strong>Usman Khan</strong></td>
+              <td><span class="badge-dept">Medical</span></td>
+              <td>10 Days</td>
+              <td>10 Days</td>
+              <td><span class="attendance-percent">100%</span></td>
+              <td><span class="view-link">View History →</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ATTENDANCE HISTORY MODAL POPUP -->
+<div class="modal" id="historyModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeHistory()">&times;</button>
+    
+    <div class="history-header">
+      <h3 id="modalName">Volunteer Name</h3>
+      <div class="history-meta">
+        <span id="modalID">#VOL-00</span> · <span id="modalDept">Department</span> · Total Attendance Rate: <strong id="modalRate" style="color:#27ae60;">0%</strong>
+      </div>
+    </div>
+
+    <table class="attendance-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Camp / Event Duty</th>
+          <th>Shift</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="historyTableBody">
+        <!-- Dynamic History Rows -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h4>Amaan Foundation</h4>
+        <p>Medical care, relief, and community security — serving our neighbourhoods since 2008.</p>
+      </div>
+      <div>
+        <h4>Organization</h4>
+        <ul>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get involved</h4>
+        <ul>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="volunteer.html">Volunteer</a></li>
+          <li><a href="attendance-history.html">Attendance Directory</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+92210000000">+92 21 0000 000</a></li>
+          <li><a href="mailto:info@amaanfoundation.org">info@amaanfoundation.org</a></li>
+          <li><a href="#">Karachi, Pakistan</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Amaan Foundation. All rights reserved.</span>
+      <span>Registered non-profit · Est. 2008</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Sample Data for History Log
+  const historyAli = [
+    { date: '14 Feb 2026', event: '500th Medical Camp — Karachi', shift: 'Morning', status: 'P' },
+    { date: '28 Jan 2026', event: 'Mobile Health Unit — Badin', shift: 'Full Day', status: 'P' },
+    { date: '12 Jan 2026', event: 'Winter Relief Camp — Thatta', shift: 'Morning', status: 'L' },
+    { date: '20 Dec 2025', event: 'Eye Care Camp — Karachi', shift: 'Full Day', status: 'P' }
+  ];
+
+  const historyRaza = [
+    { date: '14 Feb 2026', event: 'Security Detail — Public Event', shift: 'Full Day', status: 'P' },
+    { date: '05 Feb 2026', event: 'Community Event Patrol', shift: 'Evening', status: 'P' },
+    { date: '18 Jan 2026', event: 'Ration Drive Ground Security', shift: 'Full Day', status: 'P' }
+  ];
+
+  const historyAhmed = [
+    { date: '10 Feb 2026', event: 'Ration Pack Loading Drive', shift: 'Morning', status: 'P' },
+    { date: '25 Jan 2026', event: 'Emergency Relief Supply', shift: 'Full Day', status: 'A' },
+    { date: '08 Jan 2026', event: 'Winter Blanket Distribution', shift: 'Morning', status: 'P' }
+  ];
+
+  const historyZain = [
+    { date: '14 Feb 2026', event: '500th Medical Camp Photo Coverage', shift: 'Evening', status: 'L' },
+    { date: '01 Feb 2026', event: 'Annual Report Shoot', shift: 'Full Day', status: 'P' }
+  ];
+
+  const historyUsman = [
+    { date: '14 Feb 2026', event: '500th Medical Camp — Karachi', shift: 'Morning', status: 'P' },
+    { date: '30 Jan 2026', event: 'Mobile Health Unit — Hyderabad', shift: 'Full Day', status: 'P' }
+  ];
+
+  // Open History Modal
+  function openHistory(name, id, dept, total, present, rate, data) {
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalID').textContent = id;
+    document.getElementById('modalDept').textContent = dept;
+    document.getElementById('modalRate').textContent = rate;
+
+    const tbody = document.getElementById('historyTableBody');
+    tbody.innerHTML = '';
+
+    data.forEach(item => {
+      let statusClass = 'p';
+      let statusText = 'Present';
+      if(item.status === 'L') { statusClass = 'l'; statusText = 'Late'; }
+      if(item.status === 'A') { statusClass = 'a'; statusText = 'Absent'; }
+
+      const row = `
+        <tr>
+          <td style="font-family:var(--mono);">${item.date}</td>
+          <td><strong>${item.event}</strong></td>
+          <td>${item.shift}</td>
+          <td><span class="status-tag ${statusClass}">${statusText}</span></td>
+        </tr>
+      `;
+      tbody.innerHTML += row;
+    });
+
+    document.getElementById('historyModal').classList.add('active');
+  }
+
+  function closeHistory() {
+    document.getElementById('historyModal').classList.remove('active');
+  }
+
+  // Filter Table
+  function filterVolunteers() {
+    const searchVal = document.getElementById('searchInput').value.toLowerCase();
+    const deptVal = document.getElementById('deptFilter').value;
+    const rows = document.querySelectorAll('#volunteersTable tbody tr');
+
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const dept = row.querySelector('.badge-dept').textContent;
+
+      const matchSearch = text.includes(searchVal);
+      const matchDept = deptVal === 'all' || dept === deptVal;
+
+      if(matchSearch && matchDept) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  }
+
+  // Mobile menu toggle
+  const menuBtn = document.querySelector('.menu-btn');
+  const navLinks = document.querySelector('nav.links');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    if(isOpen){
+      navLinks.style.display = 'none';
+    } else {
+      navLinks.style.display = 'flex';
+      navLinks.style.flexDirection = 'column';
+      navLinks.style.position = 'absolute';
+      navLinks.style.top = '74px';
+      navLinks.style.left = '0';
+      navLinks.style.right = '0';
+      navLinks.style.background = 'var(--paper)';
+      navLinks.style.padding = '20px 24px';
+      navLinks.style.borderBottom = '1px solid var(--line)';
+      navLinks.style.gap = '18px';
+    }
+  });
+
+function volunteerhistory(){
+
+window.location.href='volunteerhistory.html'
+
+}
+
+</script>
+
+</body>
+</html>
