@@ -826,7 +826,7 @@ submitBtn.addEventListener('click', async () => {
     const City = document.getElementById('city').value;
     const Message = document.getElementById('msg').value;
 
-    const response = await fetch('http://localhost:5000/api', {
+    const response = await fetch('http://localhost:5000/donations/api', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
